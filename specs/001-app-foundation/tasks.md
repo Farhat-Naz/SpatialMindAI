@@ -26,10 +26,10 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 - [x] T002 Configure TypeScript strict mode and `@/` path alias in `tsconfig.json`
 - [x] T003 [P] Install all production dependencies: `react-leaflet leaflet @types/leaflet zustand next-themes @tanstack/react-query lucide-react clsx tailwind-merge`
 - [x] T004 [P] Configure Tailwind CSS v4 with `darkMode: 'class'` in `tailwind.config.ts` and directives in `src/app/globals.css`
-- [ ] T005 [P] Initialize shadcn/ui CLI (`npx shadcn@latest init`); configure `components.json` to output to `src/shared/components/ui/`
-- [ ] T006 [P] Install shadcn/ui components via CLI: `button sheet dropdown-menu tooltip badge separator`
-- [ ] T007 [P] Configure ESLint with `@typescript-eslint/no-explicit-any: error` and `next/core-web-vitals` preset
-- [ ] T008 Configure `next.config.ts` with HTTP security headers: CSP (allow OSM + Esri tile CDNs), X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy, HSTS
+- [x] T005 [P] Initialize shadcn/ui CLI (`npx shadcn@latest init`); configure `components.json` to output to `src/shared/components/ui/`
+- [x] T006 [P] Install shadcn/ui components via CLI: `button sheet dropdown-menu tooltip badge separator`
+- [x] T007 [P] Configure ESLint with `@typescript-eslint/no-explicit-any: error` and `next/core-web-vitals` preset
+- [x] T008 Configure `next.config.ts` with HTTP security headers: CSP (allow OSM + Esri tile CDNs), X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy, HSTS
 
 ---
 
