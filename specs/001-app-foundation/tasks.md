@@ -39,8 +39,8 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 
 ⚠️ **CRITICAL**: No user story work starts until this phase is complete.
 
-- [ ] T009 Create `src/shared/types/common.types.ts` — export `LatLng`, `Nullable<T>`, `Theme`, `SidebarState`, `MapStatus`
-- [ ] T010 [P] Extend `src/shared/lib/utils.ts` with `formatLatLng(coords: LatLng | null): string` and `clamp(v, min, max)` alongside existing `cn()`
+- [x] T009 Create `src/shared/types/common.types.ts` — export `LatLng`, `Nullable<T>`, `Theme`, `SidebarState`, `MapStatus`
+- [x] T010 [P] Extend `src/shared/lib/utils.ts` with `formatLatLng(coords: LatLng | null): string` and `clamp(v, min, max)` alongside existing `cn()`
 - [ ] T011 [P] Create `src/shared/components/LoadingSpinner.tsx` — accepts `size?: 'sm'|'md'|'lg'`, `label?: string`, `className?`; uses `animate-spin`; `role="status"`
 - [ ] T012 [P] Create `src/shared/components/ErrorBoundary.tsx` — class component; accepts `fallback: React.ReactNode`; catches render errors
 - [ ] T013 Configure `src/app/globals.css` — add `@import 'leaflet/dist/leaflet.css'`; define `:root` and `.dark` CSS variable blocks for shadcn tokens; no raw hex values in components
