@@ -42,7 +42,7 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 - [x] T009 Create `src/shared/types/common.types.ts` — export `LatLng`, `Nullable<T>`, `Theme`, `SidebarState`, `MapStatus`
 - [x] T010 [P] Extend `src/shared/lib/utils.ts` with `formatLatLng(coords: LatLng | null): string` and `clamp(v, min, max)` alongside existing `cn()`
 - [x] T011 [P] Create `src/shared/components/LoadingSpinner.tsx` — accepts `size?: 'sm'|'md'|'lg'`, `label?: string`, `className?`; uses `animate-spin`; `role="status"`
-- [ ] T012 [P] Create `src/shared/components/ErrorBoundary.tsx` — class component; accepts `fallback: React.ReactNode`; catches render errors
+- [x] T012 [P] Create `src/shared/components/ErrorBoundary.tsx` — class component; accepts `fallback: React.ReactNode`; catches render errors
 - [ ] T013 Configure `src/app/globals.css` — add `@import 'leaflet/dist/leaflet.css'`; define `:root` and `.dark` CSS variable blocks for shadcn tokens; no raw hex values in components
 - [ ] T014 Create `src/app/providers.tsx` — `'use client'`; `QueryClient` with `staleTime: 5 * 60 * 1000`; export `QueryProvider` wrapping `QueryClientProvider`
 - [ ] T015 Update `src/app/layout.tsx` — wrap with `next-themes ThemeProvider` (`attribute="class"`, `defaultTheme="system"`, `enableSystem`); wrap with `QueryProvider`; add `suppressHydrationWarning` to `<html>`; use `next/font` for Inter/Geist
