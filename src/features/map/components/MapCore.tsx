@@ -1,0 +1,84 @@
+"use client"
+
+import { useEffect } from "react"
+import {
+  MapContainer as LeafletMapContainer,
+  TileLayer,
+  ZoomControl,
+  ScaleControl,
+  useMap,
+  useMapEvents,
+} from "react-leaflet"
+import { useMapStore } from "@/features/map/store/mapStore"
+import { useDashboardStore } from "@/features/dashboard/store/dashboardStore"
+import { useCoordinates } from "@/features/map/hooks/useCoordinates"
+import { BASEMAPS } from "@/features/map/constants/basemaps"
+
+function MapEventHandler() {
+  const setMapStatus = useMapStore((s) => s.setMapStatus)
+
+  useEffect(() => {
+    setMapStatus("loading")
+  }, [setMapStatus])
+
+  useMapEvents({
+    load() {
+      setMapStatus("ready")
+    },
+  })
+
+  return null
+}
+
+function CoordinatesTracker() {
+  useCoordinates()
+  return null
+}
+
+function ResizeHandler() {
+  const map = useMap()
+  const sidebarState = useDashboardStore((s) => s.sidebarState)
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      map.invalidateSize()
+    }, 300)
+
+    return () => clearTimeout(id)
+  }, [map, sidebarState])
+
+  return null
+}
+
+export function MapCore() {
+  const center = useMapStore((s) => s.center)
+  const zoom = useMapStore((s) => s.zoom)
+  const activeBasemapId = useMapStore((s) => s.activeBasemapId)
+  const setError = useMapStore((s) => s.setError)
+
+  const activeBasemap =
+    BASEMAPS.find((b) => b.id === activeBasemapId) ?? BASEMAPS[0]
+
+  return (
+    <LeafletMapContainer
+      center={[center.lat, center.lng]}
+      zoom={zoom}
+      className="h-full w-full"
+      zoomControl={false}
+    >
+      <TileLayer
+        url={activeBasemap.urlTemplate}
+        attribution={activeBasemap.attribution}
+        maxZoom={activeBasemap.maxZoom}
+        eventHandlers={{
+          tileerror: () => setError("Failed to load map tiles"),
+        }}
+      />
+      <ZoomControl position="topright" />
+      <ScaleControl imperial={false} />
+      <MapEventHandler />
+      <CoordinatesTracker />
+      <ResizeHandler />
+    </LeafletMapContainer>
+  )
+}
