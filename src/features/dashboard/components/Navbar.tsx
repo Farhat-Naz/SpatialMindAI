@@ -2,6 +2,7 @@
 
 import { Menu } from "lucide-react"
 import { Button } from "@/shared/components/ui/button"
+import { ThemeToggle } from "@/features/theme/components/ThemeToggle"
 import { Toolbar } from "./Toolbar"
 
 interface NavbarProps {
@@ -30,7 +31,10 @@ export function Navbar({ onMenuToggle, isMobile, children }: NavbarProps) {
         <span className="font-semibold">SpatialMind AI</span>
       </div>
       <Toolbar />
-      <div className="flex items-center gap-2">{children}</div>
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
+        {children}
+      </div>
     </header>
   )
 }

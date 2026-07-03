@@ -90,7 +90,7 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 
 - [X] T032 [P] [US2] Create `src/features/theme/hooks/useTheme.ts` — wraps `next-themes` `useTheme`; returns `{ theme, toggle, setTheme, isDark }`; `toggle()` switches between `'light'` and `'dark'`; `isDark` = `theme === 'dark'`
 - [X] T033 [US2] Create `src/features/theme/components/ThemeToggle.tsx` — uses `useTheme`; shadcn `<Button variant="ghost" size="icon">`; shows lucide `Sun` when dark, `Moon` when light; `aria-pressed={isDark}`; `aria-label="Toggle dark mode"`; `className?` prop
-- [ ] T034 [US2] Add `<ThemeToggle />` to `src/features/dashboard/components/Navbar.tsx` (right slot); verify all four layout regions render correctly in both light and dark themes with Tailwind `dark:` variants; ensure no FOUC
+- [X] T034 [US2] Add `<ThemeToggle />` to `src/features/dashboard/components/Navbar.tsx` (right slot); verify all four layout regions render correctly in both light and dark themes with Tailwind `dark:` variants; ensure no FOUC
 
 **Checkpoint**: US2 complete. Theme toggle works; preference persists via next-themes localStorage. ✅
 
