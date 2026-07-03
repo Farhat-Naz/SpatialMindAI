@@ -74,7 +74,7 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 - [x] T028 [P] [US1] Create `src/features/dashboard/components/Toolbar.tsx` — `<nav aria-label="Toolbar">`; accepts `children?: React.ReactNode` and `className?`; empty in Phase 1
 - [x] T029 [P] [US1] Create `src/features/dashboard/components/Navbar.tsx` — accepts `onMenuToggle: () => void`, `isMobile: boolean`, `children?: React.ReactNode`; logo "SpatialMind AI" left-aligned; `<Toolbar />` center; `children` slot right-aligned (for ThemeToggle); when `isMobile`: shows lucide `Menu` icon button calling `onMenuToggle`; `role="banner"`
 - [x] T030 [US1] Create `src/features/dashboard/components/DashboardLayout.tsx` — CSS Grid `h-screen` or `h-dvh`; `grid-rows-[auto_1fr_auto]`; main area `grid-cols-[auto_1fr]`; composes `<Navbar>`, `<Sidebar>` (stub — just a `<aside>` for now), `<MapContainer className="h-full w-full" />`, `<StatusBar />`; imports `useSidebar` (will be wired in US3); no overflow
-- [ ] T031 [US1] Update `src/app/page.tsx` — replace all boilerplate; render `<DashboardLayout />`; verify at `http://localhost:3000` all four regions visible and map loads
+- [x] T031 [US1] Update `src/app/page.tsx` — replace all boilerplate; render `<DashboardLayout />`; verify at `http://localhost:3000` all four regions visible and map loads
 
 **Checkpoint**: US1 complete and independently testable. Dashboard renders, map loads, coordinates display, layer switcher works. ✅
 
@@ -88,8 +88,8 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 
 ### Implementation for User Story 2
 
-- [ ] T032 [P] [US2] Create `src/features/theme/hooks/useTheme.ts` — wraps `next-themes` `useTheme`; returns `{ theme, toggle, setTheme, isDark }`; `toggle()` switches between `'light'` and `'dark'`; `isDark` = `theme === 'dark'`
-- [ ] T033 [US2] Create `src/features/theme/components/ThemeToggle.tsx` — uses `useTheme`; shadcn `<Button variant="ghost" size="icon">`; shows lucide `Sun` when dark, `Moon` when light; `aria-pressed={isDark}`; `aria-label="Toggle dark mode"`; `className?` prop
+- [X] T032 [P] [US2] Create `src/features/theme/hooks/useTheme.ts` — wraps `next-themes` `useTheme`; returns `{ theme, toggle, setTheme, isDark }`; `toggle()` switches between `'light'` and `'dark'`; `isDark` = `theme === 'dark'`
+- [X] T033 [US2] Create `src/features/theme/components/ThemeToggle.tsx` — uses `useTheme`; shadcn `<Button variant="ghost" size="icon">`; shows lucide `Sun` when dark, `Moon` when light; `aria-pressed={isDark}`; `aria-label="Toggle dark mode"`; `className?` prop
 - [ ] T034 [US2] Add `<ThemeToggle />` to `src/features/dashboard/components/Navbar.tsx` (right slot); verify all four layout regions render correctly in both light and dark themes with Tailwind `dark:` variants; ensure no FOUC
 
 **Checkpoint**: US2 complete. Theme toggle works; preference persists via next-themes localStorage. ✅
