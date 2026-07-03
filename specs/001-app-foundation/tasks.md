@@ -122,7 +122,7 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 
 ### Implementation for User Story 4
 
-- [ ] T040 [P] [US4] Create `src/features/dashboard/components/MobileNav.tsx` — uses shadcn `<Sheet side="left">`; accepts `isOpen: boolean`, `onClose: () => void`, `children?: React.ReactNode`; focus trap and Escape-to-close provided by Radix; `aria-modal` set by Radix
+- [X] T040 [P] [US4] Create `src/features/dashboard/components/MobileNav.tsx` — uses shadcn `<Sheet side="left">`; accepts `isOpen: boolean`, `onClose: () => void`, `children?: React.ReactNode`; focus trap and Escape-to-close provided by Radix; `aria-modal` set by Radix
 - [ ] T041 [US4] Update `src/features/dashboard/components/DashboardLayout.tsx` — add `isMobile` from `useBreakpoint(767)` and `mobileNavOpen` state; on mobile: show `<MobileNav>`, hide `<Sidebar>` (`hidden md:flex`); on desktop: show `<Sidebar>`, hide `<MobileNav>`; pass `isMobile` and `onMenuToggle` to `<Navbar>`
 - [ ] T042 [US4] QA and fix layout at 320px, 768px, 1280px, 1920px — verify no horizontal overflow, all controls visible, StatusBar text does not clip, map fills available space; modify `DashboardLayout.tsx`, `Navbar.tsx`, `StatusBar.tsx` as needed
 
