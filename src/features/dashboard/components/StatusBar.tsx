@@ -16,9 +16,11 @@ export function StatusBar({ children }: StatusBarProps) {
     mapStatus === "ready" ? formatLatLng(lastKnownCoords) : "—"
 
   return (
-    <footer className="flex items-center justify-between border-t bg-background px-3 py-1 text-xs text-muted-foreground">
-      <span aria-live="polite">{coordDisplay}</span>
-      <span>Zoom: {zoom}</span>
+    <footer className="flex items-center justify-between gap-2 overflow-hidden border-t bg-background px-3 py-1 text-xs text-muted-foreground">
+      <span className="min-w-0 truncate" aria-live="polite">
+        {coordDisplay}
+      </span>
+      <span className="shrink-0">Zoom: {zoom}</span>
       {children}
     </footer>
   )

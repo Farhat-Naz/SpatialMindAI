@@ -20,8 +20,8 @@ export function DashboardLayout() {
         onMenuToggle={() => setMobileNavOpen(true)}
         isMobile={isMobile}
       />
-      <div className="grid grid-cols-[auto_1fr] overflow-hidden">
-        <div className="hidden md:flex">
+      <div className="grid min-h-0 grid-cols-[auto_minmax(0,1fr)] overflow-hidden">
+        <div className="col-start-1 hidden md:flex">
           <Sidebar state={sidebarState} onToggle={toggle} />
         </div>
         {isMobile && (
@@ -32,7 +32,7 @@ export function DashboardLayout() {
             <Sidebar state={sidebarState} onToggle={toggle} />
           </MobileNav>
         )}
-        <MapContainer className="h-full w-full" />
+        <MapContainer className="col-start-2 h-full min-h-0 w-full min-w-0" />
       </div>
       <StatusBar />
     </div>
