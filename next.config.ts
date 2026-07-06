@@ -1,10 +1,13 @@
 import type { NextConfig } from "next";
 import withBundleAnalyzer from "@next/bundle-analyzer";
 
+const isDev = process.env.NODE_ENV !== "production";
+
 const csp = [
   "default-src 'self'",
-  // Next.js App Router requires 'unsafe-inline' for hydration scripts
-  "script-src 'self' 'unsafe-inline'",
+  // Next.js App Router requires 'unsafe-inline' for hydration scripts;
+  // dev mode additionally needs 'unsafe-eval' for the Fast Refresh/HMR runtime
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   // Tailwind and shadcn inject inline styles at runtime
   "style-src 'self' 'unsafe-inline'",
   // next/font self-hosts fonts under /_next/static/media — no external CDN needed
