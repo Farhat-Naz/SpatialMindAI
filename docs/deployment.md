@@ -1,0 +1,107 @@
+# Deployment: Security Headers
+
+Security headers are configured in [`next.config.ts`](../next.config.ts) via the
+`headers()` function and applied to every route (`source: "/(.*)"`).
+
+## The 5 Required Security Headers
+
+| # | Header | Exact Value |
+|---|---|---|
+| 1 | `Content-Security-Policy` | See [Content Security Policy](#content-security-policy) below |
+| 2 | `X-Frame-Options` | `DENY` |
+| 3 | `X-Content-Type-Options` | `nosniff` |
+| 4 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
+| 5 | `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` |
+
+> **Note**: The deployment also sends a `Permissions-Policy` header
+> (`camera=(), microphone=(), payment=(), usb=(), geolocation=(self)`) as an
+> additional hardening measure beyond the 5 required headers above. It disables
+> unused browser APIs; `geolocation=(self)` is reserved for a future
+> "use my location" feature.
+
+## Content Security Policy
+
+The `Content-Security-Policy` header value is the following directives joined
+with `; `:
+
+```
+default-src 'self';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline';
+font-src 'self';
+img-src 'self' data: blob: https://*.tile.openstreetmap.org https://server.arcgisonline.com;
+connect-src 'self' https://*.tile.openstreetmap.org https://server.arcgisonline.com;
+object-src 'none';
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self'
+```
+
+### `img-src`
+
+```
+img-src 'self' data: blob: https://*.tile.openstreetmap.org https://server.arcgisonline.com
+```
+
+Allows Leaflet to render:
+- Same-origin assets (`'self'`)
+- Inline/generated images (`data:`, `blob:`)
+- OSM basemap tiles (`https://*.tile.openstreetmap.org` — covers the `a`/`b`/`c` tile subdomains)
+- Esri World Imagery satellite tiles (`https://server.arcgisonline.com`)
+
+### `connect-src`
+
+```
+connect-src 'self' https://*.tile.openstreetmap.org https://server.arcgisonline.com
+```
+
+Leaflet's `TileLayer` fetches tiles via XHR/`fetch`, so `connect-src` must
+allow the same two origins as `img-src`:
+- `https://*.tile.openstreetmap.org`
+- `https://server.arcgisonline.com`
+
+### Required allowlist entries
+
+Both the `img-src` and `connect-src` directives must include these two entries
+for the map basemaps to load:
+
+- `*.tile.openstreetmap.org`
+- `server.arcgisonline.com`
+
+## Verifying Headers with `curl -I`
+
+Run against the deployed URL and confirm each of the 5 headers (plus
+`Permissions-Policy`) is present with the exact value documented above:
+
+```bash
+curl -I https://<your-deployment-domain>/
+```
+
+Expected output includes lines such as:
+
+```
+content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline'; ...
+x-frame-options: DENY
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000; includeSubDomains
+permissions-policy: camera=(), microphone=(), payment=(), usb=(), geolocation=(self)
+```
+
+If any header is missing or its value differs from what's documented above,
+check `next.config.ts` and confirm the deployment is serving the latest build.
+
+## Validating with securityheaders.com
+
+1. Deploy the application to a publicly reachable HTTPS URL (securityheaders.com
+   cannot scan `localhost`).
+2. Go to https://securityheaders.com and enter the deployment URL.
+3. Run the scan and confirm:
+   - An overall grade of **A** or better.
+   - All 5 required headers above are detected and reported with no warnings.
+   - No missing-header findings for CSP, X-Frame-Options,
+     X-Content-Type-Options, Referrer-Policy, or Strict-Transport-Security.
+4. If the scan flags the CSP as containing `'unsafe-inline'` for
+   `script-src`/`style-src`, this is expected and required for Next.js App
+   Router hydration and Tailwind/shadcn runtime style injection (see comments
+   in `next.config.ts`) — it is not a regression to fix.
