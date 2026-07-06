@@ -132,17 +132,15 @@ description: "Task list for Platform Foundation & Map Shell (Phase 1)"
 
 ## Phase N: Polish & Cross-Cutting Concerns
 
-- [ ] T043 [P] Add `aria-label` to Leaflet ZoomControl buttons in `src/features/map/components/MapCore.tsx` (use `map.zoomControl.getContainer()` refs or custom Leaflet control); verify Tab-reachable with visible focus ring
-- [ ] T044 [P] Add skip link `<a href="#map" className="sr-only focus:not-sr-only">Skip to map</a>` to `src/app/layout.tsx` or `DashboardLayout.tsx`; verify Tab order: skip-link → Navbar → SidebarToggle → map controls → StatusBar
-- [ ] T045 [P] Add `@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }` override to `src/app/globals.css`; verify sidebar still collapses/expands without animation when motion reduced
-- [ ] T046 Run `npx tsc --noEmit`; fix every error until exit code 0; no `@ts-ignore` or `any` types anywhere
-- [ ] T047 Run `npx eslint src --max-warnings 0`; fix every warning and error until exit code 0
+- [x] T043 [P] Add `aria-label` to Leaflet ZoomControl buttons in `src/features/map/components/MapCore.tsx` (use `map.zoomControl.getContainer()` refs or custom Leaflet control); verify Tab-reachable with visible focus ring
+- [x] T044 [P] Add skip link `<a href="#map" className="sr-only focus:not-sr-only">Skip to map</a>` to `src/app/layout.tsx` or `DashboardLayout.tsx`; verify Tab order: skip-link → Navbar → SidebarToggle → map controls → StatusBar
+- [x] T045 [P] Add `@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }` override to `src/app/globals.css`; verify sidebar still collapses/expands without animation when motion reduced
+- [x] T046 Run `npx tsc --noEmit`; fix every error until exit code 0; no `@ts-ignore` or `any` types anywhere
+- [x] T047 Run `npx eslint src --max-warnings 0`; fix every warning and error until exit code 0
 - [ ] T048 [P] Write `src/features/dashboard/__tests__/useSidebar.test.ts` — test: toggle changes state; toggle saves desktopPreference; autoCollapse does NOT change desktopPreference; restoreDesktop restores preference value
-
-
-
-- [ ] T050 [P] Write `src/features/dashboard/__tests__/DashboardLayout.test.tsx` — RTL test; mock `next/dynamic` and `react-leaflet`; assert `role="banner"`, sidebar `<aside>`, map container div, StatusBar all present
-- [ ] T051 Add `@next/bundle-analyzer` to `package.json` devDependencies; run `ANALYZE=true npm run build`; confirm Leaflet is NOT in the initial JS chunk; confirm initial bundle < 200 KB gzipped
+- [ ] T049 [P] Write `src/features/map/__tests__/useCoordinates.test.ts` — test: returns `"—"` when mapStatus not ready; returns formatted coords after mousemove; retains last coords on mouseleave
+- [x] T050 [P] Write `src/features/dashboard/__tests__/DashboardLayout.test.tsx` — RTL test; mock `next/dynamic` and `react-leaflet`; assert `role="banner"`, sidebar `<aside>`, map container div, StatusBar all present
+- [x] T051 Add `@next/bundle-analyzer` to `package.json` devDependencies; run `ANALYZE=true npm run build`; confirm Leaflet is NOT in the initial JS chunk; confirm initial bundle < 200 KB gzipped
 - [ ] T052 Create `docs/deployment.md` — document all 5 security headers with exact values; document CSP `img-src` and `connect-src` entries for `*.tile.openstreetmap.org` and `server.arcgisonline.com`; instructions for `curl -I` header verification and securityheaders.com audit
 
 ---
