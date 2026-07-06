@@ -1,19 +1,37 @@
 "use client"
 
+import { useState } from "react"
 import { Navbar } from "./Navbar"
 import { Sidebar } from "./Sidebar"
+import { MobileNav } from "./MobileNav"
 import { StatusBar } from "./StatusBar"
 import { useSidebar } from "../hooks/useSidebar"
+import { useBreakpoint } from "../hooks/useBreakpoint"
 import { MapContainer } from "@/features/map"
 
 export function DashboardLayout() {
   const { sidebarState, toggle } = useSidebar()
+  const isMobile = useBreakpoint(767)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto] overflow-hidden">
-      <Navbar onMenuToggle={toggle} isMobile={false} />
+      <Navbar
+        onMenuToggle={() => setMobileNavOpen(true)}
+        isMobile={isMobile}
+      />
       <div className="grid grid-cols-[auto_1fr] overflow-hidden">
-        <Sidebar state={sidebarState} onToggle={toggle} />
+        <div className="hidden md:flex">
+          <Sidebar state={sidebarState} onToggle={toggle} />
+        </div>
+        {isMobile && (
+          <MobileNav
+            isOpen={mobileNavOpen}
+            onClose={() => setMobileNavOpen(false)}
+          >
+            <Sidebar state={sidebarState} onToggle={toggle} />
+          </MobileNav>
+        )}
         <MapContainer className="h-full w-full" />
       </div>
       <StatusBar />
