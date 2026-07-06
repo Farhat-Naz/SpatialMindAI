@@ -7,6 +7,11 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  oxc: {
+    // tsconfig.json sets "jsx": "preserve" for Next.js's SWC transform;
+    // override it here so Vite's oxc transformer strips JSX for the test build.
+    jsx: { runtime: "automatic" },
+  },
   test: {
     environment: "jsdom",
   },
