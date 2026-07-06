@@ -35,6 +35,34 @@ function CoordinatesTracker() {
   return null
 }
 
+const ZOOM_BUTTON_FOCUS_CLASSES = [
+  "focus-visible:outline-2",
+  "focus-visible:outline-offset-2",
+  "focus-visible:outline-ring",
+]
+
+function ZoomControlAccessibility() {
+  const map = useMap()
+
+  useEffect(() => {
+    const container = map.getContainer()
+    const zoomInButton = container.querySelector<HTMLAnchorElement>(
+      ".leaflet-control-zoom-in"
+    )
+    const zoomOutButton = container.querySelector<HTMLAnchorElement>(
+      ".leaflet-control-zoom-out"
+    )
+
+    zoomInButton?.setAttribute("aria-label", "Zoom in")
+    zoomInButton?.classList.add(...ZOOM_BUTTON_FOCUS_CLASSES)
+
+    zoomOutButton?.setAttribute("aria-label", "Zoom out")
+    zoomOutButton?.classList.add(...ZOOM_BUTTON_FOCUS_CLASSES)
+  }, [map])
+
+  return null
+}
+
 function ResizeHandler() {
   const map = useMap()
   const sidebarState = useDashboardStore((s) => s.sidebarState)
@@ -75,6 +103,7 @@ export function MapCore() {
         }}
       />
       <ZoomControl position="topright" />
+      <ZoomControlAccessibility />
       <ScaleControl imperial={false} />
       <MapEventHandler />
       <CoordinatesTracker />
