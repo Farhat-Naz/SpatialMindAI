@@ -175,7 +175,7 @@ is complete.
     - [ ] All `address` sub-fields optional-safe (no crash on missing keys)
     - [ ] Output strictly matches `ReverseGeocodeResult`
 
-- [ ] T016 [US1] Create `src/features/search/api/getGeocodingProvider.ts` — factory returning the active provider
+- [X] T016 [US1] Create `src/features/search/api/getGeocodingProvider.ts` — factory returning the active provider
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/api/getGeocodingProvider.ts`
@@ -184,7 +184,7 @@ is complete.
     - [ ] Only this file and Route Handlers may import `nominatimProvider.ts` directly
     - [ ] Matches `plan.md`'s External Providers factory description
 
-- [ ] T017 [US1] Create `src/features/search/api/rateLimiter.ts` — sliding-window limiter + short-TTL cache
+- [X] T017 [US1] Create `src/features/search/api/rateLimiter.ts` — sliding-window limiter + short-TTL cache
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/api/rateLimiter.ts`
@@ -202,7 +202,7 @@ code paths permitted to reach Nominatim.
 
 ⚠️ **CRITICAL**: Requires Phase A complete (provider, schemas, validation, limiter).
 
-- [ ] T018 [US1] Create `app/api/search/route.ts` — GET handler skeleton reading `q`/`limit`
+- [X] T018 [US1] Create `app/api/search/route.ts` — GET handler skeleton reading `q`/`limit`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `app/api/search/route.ts`
@@ -211,7 +211,7 @@ code paths permitted to reach Nominatim.
     - [ ] File compiles under strict TypeScript
     - [ ] No business logic beyond param extraction at this step
 
-- [ ] T019 [US1] Wire Zod validation into `app/api/search/route.ts`
+- [X] T019 [US1] Wire Zod validation into `app/api/search/route.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `app/api/search/route.ts`
@@ -220,7 +220,7 @@ code paths permitted to reach Nominatim.
     - [ ] Matches `contracts/api-contracts.md` error shape exactly
     - [ ] Valid input passes through unchanged to the next step
 
-- [ ] T020 [US1] Wire rate limiter into `app/api/search/route.ts`
+- [X] T020 [US1] Wire rate limiter into `app/api/search/route.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `app/api/search/route.ts`
@@ -229,7 +229,7 @@ code paths permitted to reach Nominatim.
     - [ ] No upstream Nominatim call occurs on a rate-limited request
     - [ ] Cached result (if present) is returned as a `200` instead of hitting the limiter
 
-- [ ] T021 [US1] Wire `getGeocodingProvider().search()` into `app/api/search/route.ts`
+- [X] T021 [US1] Wire `getGeocodingProvider().search()` into `app/api/search/route.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `app/api/search/route.ts`
@@ -238,7 +238,7 @@ code paths permitted to reach Nominatim.
     - [ ] Response shape matches contract exactly (no extra top-level fields)
     - [ ] `limit` is passed through to the provider call
 
-- [ ] T022 [US1] Add error mapping in `app/api/search/route.ts`
+- [X] T022 [US1] Add error mapping in `app/api/search/route.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `app/api/search/route.ts`
@@ -247,7 +247,7 @@ code paths permitted to reach Nominatim.
     - [ ] Simulated provider throw returns 502, not a 500 with stack trace
     - [ ] `message` is a static, user-safe string
 
-- [ ] T023 [US5] Create `app/api/reverse-geocode/route.ts` — GET handler skeleton reading `lat`/`lng`
+- [X] T023 [US5] Create `app/api/reverse-geocode/route.ts` — GET handler skeleton reading `lat`/`lng`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `app/api/reverse-geocode/route.ts`
@@ -256,7 +256,7 @@ code paths permitted to reach Nominatim.
     - [ ] Non-numeric input does not crash the handler at this step (guarded by T024 next)
     - [ ] File compiles under strict TypeScript
 
-- [ ] T024 [US5] Wire Zod validation into `app/api/reverse-geocode/route.ts`
+- [X] T024 [US5] Wire Zod validation into `app/api/reverse-geocode/route.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `app/api/reverse-geocode/route.ts`
@@ -265,7 +265,7 @@ code paths permitted to reach Nominatim.
     - [ ] Matches `contracts/api-contracts.md` exactly
     - [ ] Boundary values (exactly -90/90/-180/180) are accepted, not rejected
 
-- [ ] T025 [US5] Wire rate limiter into `app/api/reverse-geocode/route.ts`
+- [X] T025 [US5] Wire rate limiter into `app/api/reverse-geocode/route.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `app/api/reverse-geocode/route.ts`
@@ -274,7 +274,7 @@ code paths permitted to reach Nominatim.
     - [ ] Search and reverse-geocode share the same limiter budget (both count against the ~1 req/s Nominatim policy)
     - [ ] No duplicate limiter implementation created
 
-- [ ] T026 [US5] Wire `getGeocodingProvider().reverseGeocode()` into `app/api/reverse-geocode/route.ts`
+- [X] T026 [US5] Wire `getGeocodingProvider().reverseGeocode()` into `app/api/reverse-geocode/route.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `app/api/reverse-geocode/route.ts`
@@ -283,7 +283,7 @@ code paths permitted to reach Nominatim.
     - [ ] A "no address found" scenario returns 200 with `result: null`, never a 4xx/5xx
     - [ ] Response shape matches `contracts/api-contracts.md`
 
-- [ ] T027 [US5] Add error mapping in `app/api/reverse-geocode/route.ts`
+- [X] T027 [US5] Add error mapping in `app/api/reverse-geocode/route.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `app/api/reverse-geocode/route.ts`
@@ -292,7 +292,7 @@ code paths permitted to reach Nominatim.
     - [ ] Simulated provider throw returns 502
     - [ ] No stack trace leaked in `message`
 
-- [ ] T028 [P] [US1] Wire structured request logging into `app/api/search/route.ts`
+- [X] T028 [P] [US1] Wire structured request logging into `app/api/search/route.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `app/api/search/route.ts`
@@ -301,7 +301,7 @@ code paths permitted to reach Nominatim.
     - [ ] No query text or PII logged beyond what's already generically permitted
     - [ ] Log line includes a duration measured from handler entry to response
 
-- [ ] T029 [P] [US5] Wire structured request logging into `app/api/reverse-geocode/route.ts`
+- [X] T029 [P] [US5] Wire structured request logging into `app/api/reverse-geocode/route.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `app/api/reverse-geocode/route.ts`
@@ -318,7 +318,7 @@ code paths permitted to reach Nominatim.
 
 ⚠️ Requires Phase B complete (both Route Handlers functional).
 
-- [ ] T030 [US1] Create `src/features/search/services/queryKeys.ts` — centralized key factory
+- [X] T030 [US1] Create `src/features/search/services/queryKeys.ts` — centralized key factory
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/services/queryKeys.ts`
@@ -327,7 +327,7 @@ code paths permitted to reach Nominatim.
     - [ ] No other file constructs a React Query key by hand
     - [ ] Keys are stable/serializable (no functions or class instances inside)
 
-- [ ] T031 [US1] Create `src/features/search/services/searchService.ts` — fetch wrapper for `GET /api/search`
+- [X] T031 [US1] Create `src/features/search/services/searchService.ts` — fetch wrapper for `GET /api/search`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/services/searchService.ts`
@@ -336,7 +336,7 @@ code paths permitted to reach Nominatim.
     - [ ] Only this service (and no component/hook) calls `fetch('/api/search')` directly
     - [ ] Error thrown preserves the Route Handler's `code`/`message`
 
-- [ ] T032 [US5] Create `src/features/search/services/reverseGeocodeService.ts` — fetch wrapper for `GET /api/reverse-geocode`
+- [X] T032 [US5] Create `src/features/search/services/reverseGeocodeService.ts` — fetch wrapper for `GET /api/reverse-geocode`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/services/reverseGeocodeService.ts`
@@ -345,7 +345,7 @@ code paths permitted to reach Nominatim.
     - [ ] `null` result is returned normally, not thrown as an error
     - [ ] Only this service calls `fetch('/api/reverse-geocode')` directly
 
-- [ ] T033 [US1] Create `src/features/search/hooks/useSearch.ts`
+- [X] T033 [US1] Create `src/features/search/hooks/useSearch.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/hooks/useSearch.ts`
@@ -354,7 +354,7 @@ code paths permitted to reach Nominatim.
     - [ ] Query does not fire for a 1-character (or empty) query
     - [ ] Matches `contracts/hook-api.md` signature exactly
 
-- [ ] T034 [US5] Create `src/features/search/hooks/useReverseGeocode.ts`
+- [X] T034 [US5] Create `src/features/search/hooks/useReverseGeocode.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/hooks/useReverseGeocode.ts`
@@ -363,7 +363,7 @@ code paths permitted to reach Nominatim.
     - [ ] Query does not fire when `point` is `null`
     - [ ] `data === null` is distinguishable from `data === undefined` at the call site
 
-- [ ] T035 [US1] Configure retry policy on `useSearch`
+- [X] T035 [US1] Configure retry policy on `useSearch`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/hooks/useSearch.ts`
@@ -372,7 +372,7 @@ code paths permitted to reach Nominatim.
     - [ ] Simulated 400 response results in zero retries
     - [ ] Simulated 502 response results in up to 2 retries before surfacing `isError`
 
-- [ ] T036 [US5] Configure retry policy on `useReverseGeocode`
+- [X] T036 [US5] Configure retry policy on `useReverseGeocode`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/hooks/useReverseGeocode.ts`
@@ -381,7 +381,7 @@ code paths permitted to reach Nominatim.
     - [ ] Simulated 400 response results in zero retries
     - [ ] Retry backoff timing matches `useSearch`'s configuration (consistent UX)
 
-- [ ] T037 [P] [US1] Add JSDoc summaries to `searchService.ts` and `queryKeys.ts`
+- [X] T037 [P] [US1] Add JSDoc summaries to `searchService.ts` and `queryKeys.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/services/searchService.ts`, `src/features/search/services/queryKeys.ts`
@@ -390,7 +390,7 @@ code paths permitted to reach Nominatim.
     - [ ] No exported symbol lacks a JSDoc line
     - [ ] Summaries state behavior, not restate the function name
 
-- [ ] T038 [P] [US5] Add JSDoc summaries to `reverseGeocodeService.ts`
+- [X] T038 [P] [US5] Add JSDoc summaries to `reverseGeocodeService.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/services/reverseGeocodeService.ts`
@@ -406,7 +406,7 @@ code paths permitted to reach Nominatim.
 **Purpose**: Client/UI state — the only mutation path for search UI state
 (Constitution Principle IV).
 
-- [ ] T039 [US1] Create `src/features/search/store/searchStore.ts` — initial state shape
+- [X] T039 [US1] Create `src/features/search/store/searchStore.ts` — initial state shape
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -415,7 +415,7 @@ code paths permitted to reach Nominatim.
     - [ ] Matches `contracts/store-api.md`'s `SearchStoreState` exactly
     - [ ] No action logic yet — state shape only at this step
 
-- [ ] T040 [US1] Add `setQuery` action to `searchStore.ts`
+- [X] T040 [US1] Add `setQuery` action to `searchStore.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -424,7 +424,7 @@ code paths permitted to reach Nominatim.
     - [ ] Does not mutate any other field as a side effect
     - [ ] No trimming/validation logic here (that belongs to the Route Handler/hook layer)
 
-- [ ] T041 [US1] Add `openDropdown`/`closeDropdown` actions to `searchStore.ts`
+- [X] T041 [US1] Add `openDropdown`/`closeDropdown` actions to `searchStore.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -433,7 +433,7 @@ code paths permitted to reach Nominatim.
     - [ ] `closeDropdown` does not clear `query`
     - [ ] Both actions are pure state setters, no side effects
 
-- [ ] T042 [US2] Add `setHighlightedIndex` action to `searchStore.ts`
+- [X] T042 [US2] Add `setHighlightedIndex` action to `searchStore.ts`
   - **User Story**: US2 — Search Suggestions
   - **Priority**: P2
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -442,7 +442,7 @@ code paths permitted to reach Nominatim.
     - [ ] Accepts `-1` (no highlight) as a valid value
     - [ ] No bounds-clamping logic here (owned by `cmdk`/component layer)
 
-- [ ] T043 [US3] Add `selectLocation` action to `searchStore.ts`
+- [X] T043 [US3] Add `selectLocation` action to `searchStore.ts`
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -451,7 +451,7 @@ code paths permitted to reach Nominatim.
     - [ ] Calling `selectLocation` while `reverseGeocodePoint` is set clears the point
     - [ ] Matches the invariant documented in `contracts/store-api.md`
 
-- [ ] T044 [US5] Add `setReverseGeocodePoint` action to `searchStore.ts`
+- [X] T044 [US5] Add `setReverseGeocodePoint` action to `searchStore.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -460,7 +460,7 @@ code paths permitted to reach Nominatim.
     - [ ] Calling with a point while `selectedLocation` is set clears the location
     - [ ] Calling with `null` does not touch `selectedLocation`
 
-- [ ] T045 [US4] Add `addRecentSearch` action to `searchStore.ts` — dedup + move-to-top logic
+- [X] T045 [US4] Add `addRecentSearch` action to `searchStore.ts` — dedup + move-to-top logic
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -469,7 +469,7 @@ code paths permitted to reach Nominatim.
     - [ ] Selecting the same result twice yields a list of length 1, not 2
     - [ ] `searchedAt` reflects the most recent selection time
 
-- [ ] T046 [US4] Add max-10-entries eviction to `addRecentSearch` in `searchStore.ts`
+- [X] T046 [US4] Add max-10-entries eviction to `addRecentSearch` in `searchStore.ts`
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -478,7 +478,7 @@ code paths permitted to reach Nominatim.
     - [ ] List length never exceeds 10
     - [ ] The evicted entry is always the least-recently-searched one
 
-- [ ] T047 [US4] Add `clearRecentSearches` action to `searchStore.ts`
+- [X] T047 [US4] Add `clearRecentSearches` action to `searchStore.ts`
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -487,7 +487,7 @@ code paths permitted to reach Nominatim.
     - [ ] Persisted `localStorage` value is also cleared (not just in-memory state)
     - [ ] Does not affect `selectedLocation`/`reverseGeocodePoint`
 
-- [ ] T048 [US4] Wire Zustand `persist` middleware into `searchStore.ts`
+- [X] T048 [US4] Wire Zustand `persist` middleware into `searchStore.ts`
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -505,7 +505,7 @@ code paths permitted to reach Nominatim.
 
 ⚠️ Requires Phase C (hooks) and Phase D (store) complete.
 
-- [ ] T049 [P] [US1] Install shadcn `Command` component via CLI
+- [X] T049 [P] [US1] Install shadcn `Command` component via CLI
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/shared/components/ui/command.tsx` (generated by CLI)
@@ -514,7 +514,7 @@ code paths permitted to reach Nominatim.
     - [ ] `cmdk` appears as a new dependency in `package.json`
     - [ ] No manual edits needed to the generated file to compile
 
-- [ ] T050 [US1] Create `src/features/search/components/SearchInput.tsx`
+- [X] T050 [US1] Create `src/features/search/components/SearchInput.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchInput.tsx`
@@ -523,7 +523,7 @@ code paths permitted to reach Nominatim.
     - [ ] Purely presentational — no direct `fetch`/React Query usage
     - [ ] Placeholder text matches spec's UX intent ("Search places…")
 
-- [ ] T051 [US1] Create `src/features/search/components/SearchBox.tsx` — shadcn `Command` shell
+- [X] T051 [US1] Create `src/features/search/components/SearchBox.tsx` — shadcn `Command` shell
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchBox.tsx`
@@ -532,7 +532,7 @@ code paths permitted to reach Nominatim.
     - [ ] `loop` prop present (enables FR-006 wrap-around via `cmdk`)
     - [ ] `shouldFilter={false}` set (filtering is server-side, not client-side)
 
-- [ ] T052 [US2] Wire `useDebounce` into `SearchBox.tsx`
+- [X] T052 [US2] Wire `useDebounce` into `SearchBox.tsx`
   - **User Story**: US2 — Search Suggestions
   - **Priority**: P2
   - **Files**: `src/features/search/components/SearchBox.tsx`
@@ -541,7 +541,7 @@ code paths permitted to reach Nominatim.
     - [ ] Rapid typing produces at most one request per pause, verified via Network tab
     - [ ] Debounce delay is exactly 300 ms, not an approximation
 
-- [ ] T053 [US1] Add minimum-query-length gating to `SearchBox.tsx`
+- [X] T053 [US1] Add minimum-query-length gating to `SearchBox.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchBox.tsx`
@@ -550,7 +550,7 @@ code paths permitted to reach Nominatim.
     - [ ] Typing a single character never triggers a network request
     - [ ] Whitespace-only input is treated as empty (FR-002)
 
-- [ ] T054 [P] [US1] Create `src/features/search/components/SearchLoading.tsx`
+- [X] T054 [P] [US1] Create `src/features/search/components/SearchLoading.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchLoading.tsx`
@@ -559,7 +559,7 @@ code paths permitted to reach Nominatim.
     - [ ] Reused (not duplicated) by both search and reverse-geocode loading states
     - [ ] No hardcoded color values (Tailwind semantic tokens only)
 
-- [ ] T055 [P] [US1] Create `src/features/search/components/SearchEmptyState.tsx`
+- [X] T055 [P] [US1] Create `src/features/search/components/SearchEmptyState.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchEmptyState.tsx`
@@ -568,7 +568,7 @@ code paths permitted to reach Nominatim.
     - [ ] `"no-results"` echoes the query text in its message when `query` prop is passed
     - [ ] Visually distinct from `SearchLoading` and `SearchErrorState`
 
-- [ ] T056 [P] [US1] Create `src/features/search/components/SearchErrorState.tsx`
+- [X] T056 [P] [US1] Create `src/features/search/components/SearchErrorState.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchErrorState.tsx`
@@ -577,7 +577,7 @@ code paths permitted to reach Nominatim.
     - [ ] Retry button is keyboard-focusable and triggers `onRetry` on Enter/click
     - [ ] `RATE_LIMITED` errors render distinct copy from other error codes
 
-- [ ] T057 [US1] Create `src/features/search/utils/highlightMatch.ts`
+- [X] T057 [US1] Create `src/features/search/utils/highlightMatch.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/utils/highlightMatch.ts`
@@ -586,7 +586,7 @@ code paths permitted to reach Nominatim.
     - [ ] Case-insensitive matching
     - [ ] Returns the original text unchanged when there is no match
 
-- [ ] T058 [US1] Create `src/features/search/components/SearchResultItem.tsx`
+- [X] T058 [US1] Create `src/features/search/components/SearchResultItem.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchResultItem.tsx`
@@ -595,7 +595,7 @@ code paths permitted to reach Nominatim.
     - [ ] Fully keyboard-operable (Enter selects the highlighted item)
     - [ ] Reusable identically by `SearchResults` and `SearchHistory`
 
-- [ ] T059 [US1] Create `src/features/search/components/SearchResults.tsx`
+- [X] T059 [US1] Create `src/features/search/components/SearchResults.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchResults.tsx`
@@ -604,7 +604,7 @@ code paths permitted to reach Nominatim.
     - [ ] Exactly one of the four render variants is shown at any time
     - [ ] No results data is duplicated into `searchStore` (React Query remains the source of truth)
 
-- [ ] T060 [US4] Create `src/features/search/components/SearchHistory.tsx`
+- [X] T060 [US4] Create `src/features/search/components/SearchHistory.tsx`
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/components/SearchHistory.tsx`
@@ -613,7 +613,7 @@ code paths permitted to reach Nominatim.
     - [ ] Empty list renders nothing (not an empty-state message — that's a different condition per spec Edge Cases)
     - [ ] "Clear history" is keyboard-reachable
 
-- [ ] T061 [US1] Wire `SearchResults`/`SearchHistory` conditional rendering into `SearchBox.tsx`
+- [X] T061 [US1] Wire `SearchResults`/`SearchHistory` conditional rendering into `SearchBox.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/components/SearchBox.tsx`
@@ -622,7 +622,7 @@ code paths permitted to reach Nominatim.
     - [ ] Switching between the two states does not cause a layout jump
     - [ ] Focus remains in the input throughout
 
-- [ ] T062 [US1] Create `src/features/search/utils/formatDistance.ts`
+- [X] T062 [US1] Create `src/features/search/utils/formatDistance.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/utils/formatDistance.ts`
@@ -631,7 +631,7 @@ code paths permitted to reach Nominatim.
     - [ ] Returns an empty string (not `undefined`) when no subtitle data is available
     - [ ] No side effects, no I/O
 
-- [ ] T063 [US3] Wire `onSelect` handler in `SearchBox.tsx`
+- [X] T063 [US3] Wire `onSelect` handler in `SearchBox.tsx`
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/components/SearchBox.tsx`
@@ -640,7 +640,7 @@ code paths permitted to reach Nominatim.
     - [ ] Both store actions fire exactly once per selection
     - [ ] Focus is verifiably back on the input after selection (not lost to `<body>`)
 
-- [ ] T064 [P] [US2] Add `React.memo` to `SearchResultItem.tsx`
+- [X] T064 [P] [US2] Add `React.memo` to `SearchResultItem.tsx`
   - **User Story**: US2 — Search Suggestions
   - **Priority**: P2
   - **Files**: `src/features/search/components/SearchResultItem.tsx`
@@ -649,7 +649,7 @@ code paths permitted to reach Nominatim.
     - [ ] React DevTools profiler confirms only 1–2 rows re-render on arrow-key navigation
     - [ ] No stale closure bugs introduced by memoization
 
-- [ ] T065 [US1] Mount `<SearchBox />` inside `src/features/dashboard/components/Toolbar.tsx`
+- [X] T065 [US1] Mount `<SearchBox />` inside `src/features/dashboard/components/Toolbar.tsx`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/dashboard/components/Toolbar.tsx`
@@ -658,7 +658,7 @@ code paths permitted to reach Nominatim.
     - [ ] No layout regression to existing Navbar/Toolbar content
     - [ ] Search box does not overflow at 320 px width
 
-- [ ] T066 [US1] Export `SearchBox` from `src/features/search/index.ts`
+- [X] T066 [US1] Export `SearchBox` from `src/features/search/index.ts`
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/search/index.ts`
@@ -667,7 +667,7 @@ code paths permitted to reach Nominatim.
     - [ ] No internal component/hook/store is exported from the barrel
     - [ ] `Toolbar.tsx` imports only from `@/features/search`, never a deep path
 
-- [ ] T067 [US5] Create `src/features/search/components/ReverseGeocodePopup.tsx`
+- [X] T067 [US5] Create `src/features/search/components/ReverseGeocodePopup.tsx`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/components/ReverseGeocodePopup.tsx`
@@ -676,7 +676,7 @@ code paths permitted to reach Nominatim.
     - [ ] Dismiss control calls `onClose` and nothing else
     - [ ] Reuses `SearchLoading`/`SearchErrorState`/`SearchEmptyState` rather than duplicating markup
 
-- [ ] T068 [US5] Export `ReverseGeocodePopup` from `src/features/search/index.ts`
+- [X] T068 [US5] Export `ReverseGeocodePopup` from `src/features/search/index.ts`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/search/index.ts`
@@ -694,7 +694,7 @@ code paths permitted to reach Nominatim.
 
 ⚠️ Requires Phase D (store) and Phase E (components) complete.
 
-- [ ] T069 [US3] Create `src/features/search/hooks/useMapSearchIntegration.ts` — skeleton subscribing to store
+- [X] T069 [US3] Create `src/features/search/hooks/useMapSearchIntegration.ts` — skeleton subscribing to store
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/hooks/useMapSearchIntegration.ts`
@@ -703,7 +703,7 @@ code paths permitted to reach Nominatim.
     - [ ] Must be called from within a react-leaflet `MapContainer` context
     - [ ] No direct Leaflet import outside `features/map/` or this hook
 
-- [ ] T070 [US3] Implement `map.flyTo()` call in `useMapSearchIntegration.ts`
+- [X] T070 [US3] Implement `map.flyTo()` call in `useMapSearchIntegration.ts`
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/hooks/useMapSearchIntegration.ts`
@@ -712,7 +712,7 @@ code paths permitted to reach Nominatim.
     - [ ] Zoom level is always exactly 16, regardless of result type
     - [ ] Animation completes within 2 seconds (SM-003) in manual testing
 
-- [ ] T071 [US3] Create `src/features/search/components/SearchMarker.tsx`
+- [X] T071 [US3] Create `src/features/search/components/SearchMarker.tsx`
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/components/SearchMarker.tsx`
@@ -721,7 +721,7 @@ code paths permitted to reach Nominatim.
     - [ ] Renders nothing when `selectedLocation` is `null`
     - [ ] Marker position updates reactively on selection change
 
-- [ ] T072 [US3] Implement replace-not-duplicate marker logic in `SearchMarker.tsx`
+- [X] T072 [US3] Implement replace-not-duplicate marker logic in `SearchMarker.tsx`
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/components/SearchMarker.tsx`
@@ -730,7 +730,7 @@ code paths permitted to reach Nominatim.
     - [ ] At most one search marker exists on the map at any time
     - [ ] No memory leak from unremoved previous marker instances
 
-- [ ] T073 [US3] Wire flyTo-interrupt handling in `useMapSearchIntegration.ts`
+- [X] T073 [US3] Wire flyTo-interrupt handling in `useMapSearchIntegration.ts`
   - **User Story**: US3 — Map Navigation
   - **Priority**: P3
   - **Files**: `src/features/search/hooks/useMapSearchIntegration.ts`
@@ -739,7 +739,7 @@ code paths permitted to reach Nominatim.
     - [ ] Map is left in a consistent, interactive state after an interrupted flyTo
     - [ ] No console error/warning on interruption
 
-- [ ] T074 [US5] Add map `click` event handler in `src/features/map/components/MapCore.tsx`
+- [X] T074 [US5] Add map `click` event handler in `src/features/map/components/MapCore.tsx`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/map/components/MapCore.tsx`
@@ -748,7 +748,7 @@ code paths permitted to reach Nominatim.
     - [ ] Click coordinates match the clicked point precisely (no offset bug)
     - [ ] Existing zoom/pan click behavior is unaffected
 
-- [ ] T075 [US5] Guard reverse-geocode click handler for in-progress flyTo
+- [X] T075 [US5] Guard reverse-geocode click handler for in-progress flyTo
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/map/components/MapCore.tsx`
@@ -757,7 +757,7 @@ code paths permitted to reach Nominatim.
     - [ ] Clicking mid-animation produces no popup and no store update
     - [ ] Clicking immediately after animation settles works normally
 
-- [ ] T076 [US5] Mount `<ReverseGeocodePopup>` inside `MapCore.tsx`
+- [X] T076 [US5] Mount `<ReverseGeocodePopup>` inside `MapCore.tsx`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/map/components/MapCore.tsx`
@@ -766,7 +766,7 @@ code paths permitted to reach Nominatim.
     - [ ] Popup does not render when `reverseGeocodePoint` is `null`
     - [ ] Popup position matches the clicked point, not the map center
 
-- [ ] T077 [US5] Wire popup dismiss to clear `reverseGeocodePoint`
+- [X] T077 [US5] Wire popup dismiss to clear `reverseGeocodePoint`
   - **User Story**: US5 — Reverse Geocoding
   - **Priority**: P5
   - **Files**: `src/features/map/components/MapCore.tsx`, `src/features/search/components/ReverseGeocodePopup.tsx`
@@ -775,7 +775,7 @@ code paths permitted to reach Nominatim.
     - [ ] Popup and its marker are removed from the DOM after dismiss
     - [ ] Escape does not also clear the search box's `query`
 
-- [ ] T078 [US1] Verify `StatusBar.tsx` reflects post-navigation `mapStore` state
+- [X] T078 [US1] Verify `StatusBar.tsx` reflects post-navigation `mapStore` state
   - **User Story**: US1 — Place Search
   - **Priority**: P1
   - **Files**: `src/features/dashboard/components/StatusBar.tsx` (verification only — no change expected)
@@ -791,7 +791,7 @@ code paths permitted to reach Nominatim.
 **Purpose**: Wire the store/persistence logic from Phase D into the actual
 `SearchBox`/`SearchHistory` interaction flow.
 
-- [ ] T079 [US4] Wire `SearchHistory` visibility trigger on input focus
+- [X] T079 [US4] Wire `SearchHistory` visibility trigger on input focus
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/components/SearchBox.tsx`
@@ -800,7 +800,7 @@ code paths permitted to reach Nominatim.
     - [ ] Tab-focusing the input (keyboard-only) also triggers this
     - [ ] Does not show `SearchHistory` if `query` is non-empty
 
-- [ ] T080 [US4] Verify persisted `recentSearches` rehydrate correctly on page load
+- [X] T080 [US4] Verify persisted `recentSearches` rehydrate correctly on page load
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/store/searchStore.ts` (verification only)
@@ -809,7 +809,7 @@ code paths permitted to reach Nominatim.
     - [ ] Manual reload test in a real browser confirms persistence
     - [ ] Order (most-recent-first) is preserved across reload
 
-- [ ] T081 [US4] Wire "Clear history" button in `SearchHistory.tsx`
+- [X] T081 [US4] Wire "Clear history" button in `SearchHistory.tsx`
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/components/SearchHistory.tsx`
@@ -818,7 +818,7 @@ code paths permitted to reach Nominatim.
     - [ ] `localStorage` entry is also cleared, not just in-memory state
     - [ ] No confirmation dialog required (not specified by spec) but action is clearly labeled
 
-- [ ] T082 [US4] Verify re-selection-moves-to-top behavior end-to-end
+- [X] T082 [US4] Verify re-selection-moves-to-top behavior end-to-end
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/components/SearchBox.tsx` (verification only)
@@ -827,7 +827,7 @@ code paths permitted to reach Nominatim.
     - [ ] Manual test: select A, select B, re-select A → order is [A, B]
     - [ ] List length never grows from a re-selection
 
-- [ ] T083 [US4] Add graceful `localStorage`-unavailable fallback
+- [X] T083 [US4] Add graceful `localStorage`-unavailable fallback
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/store/searchStore.ts`
@@ -836,7 +836,7 @@ code paths permitted to reach Nominatim.
     - [ ] Simulated `localStorage.setItem` throw does not crash the app
     - [ ] Recent searches still work for the remainder of the session
 
-- [ ] T084 [US4] Verify recent-search keyboard accessibility via shared `SearchResultItem`
+- [X] T084 [US4] Verify recent-search keyboard accessibility via shared `SearchResultItem`
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/components/SearchHistory.tsx` (verification only)
@@ -845,7 +845,7 @@ code paths permitted to reach Nominatim.
     - [ ] Arrow keys + Enter work on recent entries with no separate code path
     - [ ] Wrap-around behavior (FR-006) also applies within the history list
 
-- [ ] T085 [US4] Add a component test placeholder check for `SearchHistory` empty/populated/clear states
+- [X] T085 [US4] Add a component test placeholder check for `SearchHistory` empty/populated/clear states
   - **User Story**: US4 — Recent Searches
   - **Priority**: P4
   - **Files**: `src/features/search/components/SearchHistory.tsx` (verification only — actual test written in Phase J, T109)
@@ -861,7 +861,7 @@ code paths permitted to reach Nominatim.
 **Purpose**: WCAG 2.2 AA compliance verification and remediation
 (Constitution Principle VI).
 
-- [ ] T086 [P] Add `aria-live="polite"` announcement region to `SearchResults.tsx`
+- [X] T086 [P] Add `aria-live="polite"` announcement region to `SearchResults.tsx`
   - **User Story**: Cross-cutting (supports US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchResults.tsx`
@@ -870,7 +870,7 @@ code paths permitted to reach Nominatim.
     - [ ] Screen reader (e.g., VoiceOver/NVDA spot check) announces "3 results found" or equivalent
     - [ ] Region does not duplicate announcements on unrelated re-renders
 
-- [ ] T087 [P] Verify `role="combobox"`/`role="listbox"` semantics remain intact
+- [X] T087 [P] Verify `role="combobox"`/`role="listbox"` semantics remain intact
   - **User Story**: Cross-cutting (supports US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchBox.tsx`, `src/features/search/components/SearchResults.tsx`
@@ -879,7 +879,7 @@ code paths permitted to reach Nominatim.
     - [ ] Browser accessibility tree inspector confirms `combobox`/`listbox`/`option` roles present
     - [ ] No `role` attribute manually duplicated/conflicting
 
-- [ ] T088 [P] Add `aria-label="Close address details"` to `ReverseGeocodePopup.tsx`
+- [X] T088 [P] Add `aria-label="Close address details"` to `ReverseGeocodePopup.tsx`
   - **User Story**: Cross-cutting (supports US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/ReverseGeocodePopup.tsx`
@@ -888,7 +888,7 @@ code paths permitted to reach Nominatim.
     - [ ] Label is announced correctly by a screen reader
     - [ ] Button is reachable via Tab
 
-- [ ] T089 [P] Add descriptive `aria-label` to the reverse-geocode marker
+- [X] T089 [P] Add descriptive `aria-label` to the reverse-geocode marker
   - **User Story**: Cross-cutting (supports US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/ReverseGeocodePopup.tsx`
@@ -897,7 +897,7 @@ code paths permitted to reach Nominatim.
     - [ ] Label updates when a new point is clicked
     - [ ] No stale label persists from a previous click
 
-- [ ] T090 Verify focus returns to `SearchInput` after result selection
+- [X] T090 Verify focus returns to `SearchInput` after result selection
   - **User Story**: Cross-cutting (supports US3)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchBox.tsx` (verification only)
@@ -906,7 +906,7 @@ code paths permitted to reach Nominatim.
     - [ ] `document.activeElement` check confirms the input in a manual/automated test
     - [ ] No intermediate focus loss to `<body>`
 
-- [ ] T091 Verify focus returns to a sane element after `ReverseGeocodePopup` dismiss
+- [X] T091 Verify focus returns to a sane element after `ReverseGeocodePopup` dismiss
   - **User Story**: Cross-cutting (supports US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/ReverseGeocodePopup.tsx` (verification only)
@@ -915,7 +915,7 @@ code paths permitted to reach Nominatim.
     - [ ] `document.activeElement` is never `<body>` after dismiss
     - [ ] Works identically for both dismiss methods (button click and Escape)
 
-- [ ] T092 Verify Escape closes dropdown/popup without clearing query text
+- [X] T092 Verify Escape closes dropdown/popup without clearing query text
   - **User Story**: Cross-cutting (supports US1, US2, US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchBox.tsx` (verification only)
@@ -940,7 +940,7 @@ code paths permitted to reach Nominatim.
 
 **Purpose**: Verify and enforce the performance budget defined in `plan.md`.
 
-- [ ] T094 [P] Verify 300 ms debounce timing matches FR-003 exactly
+- [X] T094 [P] Verify 300 ms debounce timing matches FR-003 exactly
   - **User Story**: Cross-cutting (supports US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchBox.tsx` (verification only)
@@ -949,7 +949,7 @@ code paths permitted to reach Nominatim.
     - [ ] Network tab timing confirms one request per typing pause
     - [ ] No off-by-one timer bug (e.g., 250 ms or 350 ms drift)
 
-- [ ] T095 [P] Verify `React.memo` prevents unnecessary `SearchResultItem` re-renders
+- [X] T095 [P] Verify `React.memo` prevents unnecessary `SearchResultItem` re-renders
   - **User Story**: Cross-cutting (supports US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchResultItem.tsx` (verification only)
@@ -958,7 +958,7 @@ code paths permitted to reach Nominatim.
     - [ ] React DevTools Profiler confirms limited re-render scope
     - [ ] No regression if the result list order changes
 
-- [ ] T096 [P] Memoize `highlightMatch` output per `(displayName, query)` pair
+- [X] T096 [P] Memoize `highlightMatch` output per `(displayName, query)` pair
   - **User Story**: Cross-cutting (supports US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/SearchResultItem.tsx`
@@ -967,7 +967,7 @@ code paths permitted to reach Nominatim.
     - [ ] Memoization key includes both `displayName` and `query`
     - [ ] No stale highlight shown when `query` changes
 
-- [ ] T097 [P] Verify React Query `staleTime` values reduce duplicate Nominatim calls
+- [X] T097 [P] Verify React Query `staleTime` values reduce duplicate Nominatim calls
   - **User Story**: Cross-cutting (supports US1, US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/hooks/useSearch.ts`, `src/features/search/hooks/useReverseGeocode.ts` (verification only)
@@ -976,7 +976,7 @@ code paths permitted to reach Nominatim.
     - [ ] Network tab confirms cache hit (no request) on immediate re-query
     - [ ] Cache correctly expires and re-fetches after the stale window passes
 
-- [ ] T098 Run `ANALYZE=true npm run build` and confirm bundle budget (SM-008)
+- [X] T098 Run `ANALYZE=true npm run build` and confirm bundle budget (SM-008)
   - **User Story**: Cross-cutting (validates SM-008)
   - **Priority**: N/A
   - **Files**: N/A (build/analysis step)
@@ -985,7 +985,7 @@ code paths permitted to reach Nominatim.
     - [ ] Bundle-analyzer report reviewed and attached/noted in the PR
     - [ ] If over budget, a follow-up task is filed rather than silently ignored
 
-- [ ] T099 Verify no `next/dynamic` wrapper is needed for the search feature
+- [X] T099 Verify no `next/dynamic` wrapper is needed for the search feature
   - **User Story**: Cross-cutting (validates Constitution Principle VII)
   - **Priority**: N/A
   - **Files**: N/A (architectural verification)
@@ -994,7 +994,7 @@ code paths permitted to reach Nominatim.
     - [ ] Bundle-analyzer output referenced as evidence
     - [ ] Decision recorded as still valid post-implementation (matches `research.md`)
 
-- [ ] T100 [P] Add lazy-mount guard to `ReverseGeocodePopup.tsx`
+- [X] T100 [P] Add lazy-mount guard to `ReverseGeocodePopup.tsx`
   - **User Story**: Cross-cutting (supports US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/components/ReverseGeocodePopup.tsx`
@@ -1019,7 +1019,7 @@ code paths permitted to reach Nominatim.
 **Purpose**: Unit, hook, component, API, and integration test coverage per
 Constitution Principle VIII (all three tiers required).
 
-- [ ] T102 [P] Write unit tests for `searchService.ts`
+- [X] T102 [P] Write unit tests for `searchService.ts`
   - **User Story**: Cross-cutting (validates US1)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/searchService.test.ts`
@@ -1028,7 +1028,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Test resets mocks in `beforeEach`
     - [ ] Covers both a 200 and a 400/502 response case
 
-- [ ] T103 [P] Write unit tests for `reverseGeocodeService.ts`
+- [X] T103 [P] Write unit tests for `reverseGeocodeService.ts`
   - **User Story**: Cross-cutting (validates US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/reverseGeocodeService.test.ts`
@@ -1037,7 +1037,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] `null` result does not throw
     - [ ] Error case preserves `code`/`message`
 
-- [ ] T104 [P] Write unit tests for `searchStore.ts` actions
+- [X] T104 [P] Write unit tests for `searchStore.ts` actions
   - **User Story**: Cross-cutting (validates US3, US4, US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/searchStore.test.ts`
@@ -1046,7 +1046,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Store is reset between tests (no shared mutable state)
     - [ ] Eviction-at-11-entries case explicitly tested
 
-- [ ] T105 [P] Write unit tests for `nominatimProvider.ts` response mapping
+- [X] T105 [P] Write unit tests for `nominatimProvider.ts` response mapping
   - **User Story**: Cross-cutting (validates US1, US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/nominatimProvider.test.ts`
@@ -1055,7 +1055,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Fixture missing `boundingbox`/`address` sub-fields does not throw
     - [ ] No live network call made in this test (pure function testing only)
 
-- [ ] T106 [P] Write unit tests for `highlightMatch.ts` and `formatDistance.ts`
+- [X] T106 [P] Write unit tests for `highlightMatch.ts` and `formatDistance.ts`
   - **User Story**: Cross-cutting (validates US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/utils.test.ts`
@@ -1064,7 +1064,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] No snapshot-only tests — assertions check actual segment content
     - [ ] Edge case (empty query) explicitly covered
 
-- [ ] T107 [P] Write hook tests for `useSearch.ts`
+- [X] T107 [P] Write hook tests for `useSearch.ts`
   - **User Story**: Cross-cutting (validates US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/useSearch.test.ts`
@@ -1073,7 +1073,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Test wraps the hook in a fresh `QueryClientProvider` per test
     - [ ] Retry-skip-on-4xx behavior explicitly tested
 
-- [ ] T108 [P] Write hook tests for `useReverseGeocode.ts`
+- [X] T108 [P] Write hook tests for `useReverseGeocode.ts`
   - **User Story**: Cross-cutting (validates US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/useReverseGeocode.test.ts`
@@ -1082,7 +1082,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] `data === null` vs `data === undefined` distinction explicitly asserted
     - [ ] Fresh `QueryClient` per test
 
-- [ ] T109 [P] Write hook tests for `useSearchHistory.ts`
+- [X] T109 [P] Write hook tests for `useSearchHistory.ts`
   - **User Story**: Cross-cutting (validates US4)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/useSearchHistory.test.ts`
@@ -1091,7 +1091,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Store reset before each test
     - [ ] No React Query involvement in this test (pure Zustand)
 
-- [ ] T110 [P] Write component tests for `SearchBox.tsx`
+- [X] T110 [P] Write component tests for `SearchBox.tsx`
   - **User Story**: Cross-cutting (validates US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/SearchBox.test.tsx`
@@ -1100,7 +1100,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Uses fake timers for debounce assertions
     - [ ] Wrap-around explicitly asserted (last→first, first→last)
 
-- [ ] T111 [P] Write component tests for `SearchResults.tsx`
+- [X] T111 [P] Write component tests for `SearchResults.tsx`
   - **User Story**: Cross-cutting (validates US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/SearchResults.test.tsx`
@@ -1109,7 +1109,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Each variant tested in isolation
     - [ ] `aria-live` region content asserted for at least one transition
 
-- [ ] T112 [P] Write component tests for `SearchResultItem.tsx`
+- [X] T112 [P] Write component tests for `SearchResultItem.tsx`
   - **User Story**: Cross-cutting (validates US1, US2)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/SearchResultItem.test.tsx`
@@ -1118,7 +1118,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] `onSelect` called with the correct `result` object
     - [ ] No unhandled console warnings
 
-- [ ] T113 [P] Write component tests for `SearchHistory.tsx`
+- [X] T113 [P] Write component tests for `SearchHistory.tsx`
   - **User Story**: Cross-cutting (validates US4)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/SearchHistory.test.tsx`
@@ -1127,7 +1127,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Empty state asserted to render no DOM output
     - [ ] Clear action asserted to empty the list
 
-- [ ] T114 [P] Write component tests for `SearchErrorState.tsx` and `SearchEmptyState.tsx`
+- [X] T114 [P] Write component tests for `SearchErrorState.tsx` and `SearchEmptyState.tsx`
   - **User Story**: Cross-cutting (validates US1)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/states.test.tsx`
@@ -1136,7 +1136,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Retry handler invoked exactly once per click
     - [ ] Both empty-state variants render distinct copy
 
-- [ ] T115 [P] Write API route tests for `app/api/search/route.ts`
+- [X] T115 [P] Write API route tests for `app/api/search/route.ts`
   - **User Story**: Cross-cutting (validates US1)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/searchRoute.test.ts`
@@ -1145,7 +1145,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] All four cases asserted against `contracts/api-contracts.md`'s exact shape
     - [ ] No real network call reaches Nominatim in this test
 
-- [ ] T116 [P] Write API route tests for `app/api/reverse-geocode/route.ts`
+- [X] T116 [P] Write API route tests for `app/api/reverse-geocode/route.ts`
   - **User Story**: Cross-cutting (validates US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/reverseGeocodeRoute.test.ts`
@@ -1154,7 +1154,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] `result: null` case explicitly distinguished from the error cases
     - [ ] No real network call reaches Nominatim in this test
 
-- [ ] T117 Write integration test for the Search → Map flow
+- [X] T117 Write integration test for the Search → Map flow
   - **User Story**: Cross-cutting (validates US1, US2, US3, US4)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/searchToMap.integration.test.tsx`
@@ -1163,7 +1163,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Leaflet's `flyTo` call asserted with correct arguments (coords, zoom 16)
     - [ ] Recent search appears in `searchStore` after selection
 
-- [ ] T118 Write integration test for the Reverse Geocoding flow
+- [X] T118 Write integration test for the Reverse Geocoding flow
   - **User Story**: Cross-cutting (validates US5)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/reverseGeocode.integration.test.tsx`
@@ -1172,7 +1172,7 @@ Constitution Principle VIII (all three tiers required).
     - [ ] Both the address-found and no-address-found paths are covered
     - [ ] Popup removal from the DOM confirmed after dismiss
 
-- [ ] T119 Write integration test for the Recent Searches flow
+- [X] T119 Write integration test for the Recent Searches flow
   - **User Story**: Cross-cutting (validates US4)
   - **Priority**: N/A
   - **Files**: `src/features/search/__tests__/recentSearches.integration.test.tsx`
@@ -1188,7 +1188,7 @@ Constitution Principle VIII (all three tiers required).
 **Purpose**: Feature README, API docs, deployment notes, environment variables,
 and provider-extension guide (Constitution Principle X).
 
-- [ ] T120 [P] Write `src/features/search/README.md`
+- [X] T120 [P] Write `src/features/search/README.md`
   - **User Story**: Cross-cutting
   - **Priority**: N/A
   - **Files**: `src/features/search/README.md`
@@ -1197,7 +1197,7 @@ and provider-extension guide (Constitution Principle X).
     - [ ] Usage example compiles conceptually against the actual exported API
     - [ ] Known limitations section mentions the single-instance rate-limiter caveat
 
-- [ ] T121 [P] Write `docs/api/search.md`
+- [X] T121 [P] Write `docs/api/search.md`
   - **User Story**: Cross-cutting
   - **Priority**: N/A
   - **Files**: `docs/api/search.md`
@@ -1206,7 +1206,7 @@ and provider-extension guide (Constitution Principle X).
     - [ ] No drift from `contracts/api-contracts.md` (same error codes, same shapes)
     - [ ] Includes example `curl` commands for both endpoints
 
-- [ ] T122 [P] Update `docs/deployment.md`
+- [X] T122 [P] Update `docs/deployment.md`
   - **User Story**: Cross-cutting
   - **Priority**: N/A
   - **Files**: `docs/deployment.md`
@@ -1215,7 +1215,7 @@ and provider-extension guide (Constitution Principle X).
     - [ ] Existing Phase 1 deployment content is preserved, not overwritten
     - [ ] New section is clearly delineated (e.g., under a "Phase 2: Search" heading)
 
-- [ ] T123 [P] Write `docs/environment-variables.md`
+- [X] T123 [P] Write `docs/environment-variables.md`
   - **User Story**: Cross-cutting
   - **Priority**: N/A
   - **Files**: `docs/environment-variables.md`
@@ -1224,7 +1224,7 @@ and provider-extension guide (Constitution Principle X).
     - [ ] Matches `.env.example` (T008) exactly — no undocumented or missing variables
     - [ ] Each variable's default value is stated explicitly
 
-- [ ] T124 [P] Write `docs/geocoding-providers.md`
+- [X] T124 [P] Write `docs/geocoding-providers.md`
   - **User Story**: Cross-cutting
   - **Priority**: N/A
   - **Files**: `docs/geocoding-providers.md`
@@ -1233,7 +1233,7 @@ and provider-extension guide (Constitution Principle X).
     - [ ] Steps reference the actual factory file (`getGeocodingProvider.ts`) by name
     - [ ] No implementation code included — guidance only
 
-- [ ] T125 Run final quality gate: `npx tsc --noEmit` and `npx eslint src --max-warnings 0`
+- [X] T125 Run final quality gate: `npx tsc --noEmit` and `npx eslint src --max-warnings 0`
   - **User Story**: Cross-cutting (validates Constitution Principle XVII)
   - **Priority**: N/A
   - **Files**: N/A (whole-project check)

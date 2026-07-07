@@ -1,4 +1,5 @@
 import { cn } from "@/shared/lib/utils"
+import { SearchBox } from "@/features/search"
 
 interface ToolbarProps {
   children?: React.ReactNode
@@ -8,6 +9,7 @@ interface ToolbarProps {
 export function Toolbar({ children, className }: ToolbarProps) {
   return (
     <nav aria-label="Toolbar" className={cn("flex items-center gap-2", className)}>
+      <SearchBox />
       {children}
     </nav>
   )

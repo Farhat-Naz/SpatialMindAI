@@ -1,9 +1,38 @@
 import { create } from "zustand"
-import { createJSONStorage, persist } from "zustand/middleware"
+import { createJSONStorage, persist, type StateStorage } from "zustand/middleware"
 import type { RecentSearch, ReverseGeocodeResult, SearchResult } from "@/features/search/types/search.types"
 import type { LatLng } from "@/shared/types/common.types"
 
 const MAX_RECENT_SEARCHES = 10
+
+/**
+ * Wraps `localStorage` so a quota-exceeded or private-browsing failure never
+ * throws through the `persist` middleware — recent searches degrade to
+ * in-memory-only for the rest of the session instead of crashing the app.
+ */
+const safeLocalStorage: StateStorage = {
+  getItem: (name) => {
+    try {
+      return localStorage.getItem(name)
+    } catch {
+      return null
+    }
+  },
+  setItem: (name, value) => {
+    try {
+      localStorage.setItem(name, value)
+    } catch {
+      // Ignore — storage unavailable (quota exceeded or private browsing).
+    }
+  },
+  removeItem: (name) => {
+    try {
+      localStorage.removeItem(name)
+    } catch {
+      // Ignore — storage unavailable.
+    }
+  },
+}
 
 interface SearchStoreState {
   query: string
@@ -83,7 +112,7 @@ export const useSearchStore = create<SearchStore>()(
     }),
     {
       name: "spatialMind:recentSearches",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => safeLocalStorage),
       partialize: (state) => ({ recentSearches: state.recentSearches }),
     }
   )

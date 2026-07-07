@@ -105,3 +105,24 @@ check `next.config.ts` and confirm the deployment is serving the latest build.
    `script-src`/`style-src`, this is expected and required for Next.js App
    Router hydration and Tailwind/shadcn runtime style injection (see comments
    in `next.config.ts`) — it is not a regression to fix.
+
+## Phase 2: Search
+
+The search feature (`GET /api/search`, `GET /api/reverse-geocode`) calls
+Nominatim (`nominatim.openstreetmap.org` by default) **server-side only**, so:
+
+- **Outbound network access is required** from the production server/runtime
+  to whichever host `NOMINATIM_BASE_URL` points at (see
+  `docs/environment-variables.md`). If the deployment platform blocks
+  outbound requests by default, allowlist that host.
+- **No CSP changes are needed** for this feature — the browser only ever
+  calls same-origin `/api/search` and `/api/reverse-geocode`, already covered
+  by the existing `connect-src 'self'` above.
+- **Rate limiting is enforced per server instance**, in-memory (see
+  `src/features/search/api/rateLimiter.ts`). Nominatim's usage policy caps
+  usage at ~1 request/second with a required, identifying `User-Agent`
+  (`SEARCH_USER_AGENT`). If you deploy across multiple instances/regions,
+  each instance enforces its own budget independently — the effective
+  aggregate rate against Nominatim will be higher than the configured
+  per-instance limit. Set `SEARCH_USER_AGENT` to your own deployment's
+  contact info before going to production, per Nominatim's usage policy.

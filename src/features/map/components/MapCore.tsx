@@ -13,6 +13,10 @@ import { useMapStore } from "@/features/map/store/mapStore"
 import { useDashboardStore } from "@/features/dashboard/store/dashboardStore"
 import { useCoordinates } from "@/features/map/hooks/useCoordinates"
 import { BASEMAPS } from "@/features/map/constants/basemaps"
+import { useSearchStore } from "@/features/search/store/searchStore"
+import { useMapSearchIntegration } from "@/features/search/hooks/useMapSearchIntegration"
+import { SearchMarker } from "@/features/search/components/SearchMarker"
+import { ReverseGeocodePopup } from "@/features/search/components/ReverseGeocodePopup"
 
 function MapEventHandler() {
   const setMapStatus = useMapStore((s) => s.setMapStatus)
@@ -32,6 +36,11 @@ function MapEventHandler() {
 
 function CoordinatesTracker() {
   useCoordinates()
+  return null
+}
+
+function SearchMapIntegration() {
+  useMapSearchIntegration()
   return null
 }
 
@@ -83,6 +92,8 @@ export function MapCore() {
   const zoom = useMapStore((s) => s.zoom)
   const activeBasemapId = useMapStore((s) => s.activeBasemapId)
   const setError = useMapStore((s) => s.setError)
+  const reverseGeocodePoint = useSearchStore((s) => s.reverseGeocodePoint)
+  const setReverseGeocodePoint = useSearchStore((s) => s.setReverseGeocodePoint)
 
   const activeBasemap =
     BASEMAPS.find((b) => b.id === activeBasemapId) ?? BASEMAPS[0]
@@ -108,6 +119,14 @@ export function MapCore() {
       <MapEventHandler />
       <CoordinatesTracker />
       <ResizeHandler />
+      <SearchMapIntegration />
+      <SearchMarker />
+      {reverseGeocodePoint && (
+        <ReverseGeocodePopup
+          point={reverseGeocodePoint}
+          onClose={() => setReverseGeocodePoint(null)}
+        />
+      )}
     </LeafletMapContainer>
   )
 }
